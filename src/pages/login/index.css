@@ -1,0 +1,152 @@
+.form {
+    background-image: url("../../assets/images/background-image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+form h1 {
+    color: white;
+}
+
+.form a:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+.login-form {
+    height: 500px;
+    margin: 70px auto;
+    text-align: center;
+    color: aliceblue;
+    width: 60%;
+    background-color: rgba(46, 58, 53, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+}
+.login-form .login-right {
+    width: 50%;
+}
+.login-form .login-left {
+    width: 50%;
+}
+.login-form .login-left img {
+    width: 100%;
+    height: 400px;
+}
+
+.login-form .input-box {
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box {
+    position: relative;
+}
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid aliceblue;
+    color: white;
+}
+
+.input-box input::placeholder {
+    color: aliceblue;
+}
+.input-box i {
+    position: absolute;
+    right: 10px;
+    top: 30%;
+    transform: translateX(-50%);
+    font-size: 20px;
+}
+
+.remember-forgot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 17px;
+}
+
+.btn {
+    width: 100%;
+    padding: 20px 0 0;
+    margin: 10px;
+}
+.btn button {
+    width: 100%;
+    border-radius: 20px;
+    height: 40px;
+    border: none;
+    background-color: #1f1f6a;
+    color: #1f1f6a;
+    margin: 10px 0;
+    color: #f5f5f5;
+}
+.btn button:hover {
+    transition: 0.3s;
+    background-color: #227b9e;
+}
+
+.register-link {
+    margin-top: 15px;
+}
+
+.text-danger {
+    text-align: start;
+}
+.login-form i {
+    color: white;
+}
+.login-form button {
+    margin: 0;
+}
+.login-form .divider {
+    margin: 10px 0;
+}
+@media (max-width: 900px) {
+    .login-form .login-left {
+        width: 40%;
+    }
+    .login-form .login-right {
+        width: 60%;
+    }
+}
+@media (max-width: 710px) {
+    .login-form a,
+    .login-form label,
+    .login-form button,
+    .login-form span,
+    .login-form p,
+    .login-form input {
+        font-size: 12px;
+    }
+}
+@media (max-width: 570px) {
+    .login-form {
+        display: block;
+        height: 600px;
+    }
+    .login-form .login-left img {
+        height: 80px;
+    }
+    .login-form .login-left,
+    .login-form .login-right {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+@media (max-width: 570px) {
+    .login-form {
+        width: 80%;
+        padding: 10px;
+    }
+}

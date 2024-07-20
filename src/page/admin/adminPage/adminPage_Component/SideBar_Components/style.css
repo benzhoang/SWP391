@@ -1,0 +1,40 @@
+.services-form {
+    width: 50%;
+    background-color: white;
+    margin: 0 auto;
+}
+
+.admin table {
+    min-width: 1000px;
+}
+@media (max-width: 1200px) {
+    .services-form {
+        width: 60%;
+    }
+}
+@media (max-width: 1000px) {
+    .services-form {
+        width: 70%;
+    }
+}
+@media (max-width: 834px) {
+    .services-form {
+        width: 80%;
+    }
+}
+@media (max-width: 770px) {
+    .services-form {
+        width: 95%;
+    }
+}
+@media (max-width: 552px) {
+    .services-form {
+        width: 98%;
+    }
+    .admin .userName {
+        display: none;
+    }
+    .admin .serName {
+        font-size: 11px;
+    }
+}

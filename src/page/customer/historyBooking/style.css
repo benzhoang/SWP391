@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.historyPage-body {
+    padding: 200px 0 100px 0;
+}
+.nav-status {
+    background-color: #ffffff;
+}
+.nav-status li button {
+    color: black;
+}
+.nav-status .nav-link.active {
+    background-color: transparent;
+    position: relative;
+    color: #002e86;
+    font-weight: 600;
+}
+
+.nav-status .nav-link.active::before {
+    position: absolute;
+    content: "";
+    bottom: 0px;
+    left: 0;
+    background-color: #002e86;
+    width: 100%;
+    height: 2px;
+}
+.status i {
+    color: black;
+    margin: 10px;
+}
+.orderItemList .orderItem {
+    background-color: #ffffff;
+    padding: 5px 10px;
+    margin: 0;
+}
+.orderItem .orderItem-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid rgba(128, 128, 128, 0.285);
+}
+.orderItem-header .status {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 0;
+}
+/* .orderItem-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+.orderItem-body .infor-court {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.orderItem-footer {
+    text-align: end;
+    border-top: 3px solid rgba(128, 128, 128, 0.285);
+    border-bottom: 3px solid rgba(128, 128, 128, 0.285);
+    padding: 10px 0;
+}
+.price,
+.total-price span {
+    color: #e94435;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.orderItemList .order-detail p:nth-child(4) span,
+.order-detail p:nth-child(4) i {
+    color: #002e86;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.orderItemList .orderItem-btn {
+    display: flex;
+    align-items: center;
+}
+.orderItemList .orderItem-btn button {
+    border: 1px solid black;
+    padding: 10px 0;
+}
+.orderItemList .orderItem-btn button:hover {
+    background-color: #002e86;
+    color: #ffffff;
+}
+.feedback-section {
+    margin-top: 20px;
+}
+
+.feedback-input {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.feedback-section .btn {
+    margin-top: 10px;
+}
+
+.no-bookings {
+    text-align: center;
+    margin-top: 20px;
+    color: #999;
+}
+
+.no-bookings p {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.loading-icon {
+    text-align: center;
+    margin-top: 20px;
+    color: #999;
+}
+@media (max-width: 886px) {
+    .historyPage {
+        font-size: 13px;
+    }
+}
+@media (max-width: 610px) {
+    .findOrder input {
+        font-size: 13px;
+    }
+    .findOrder input {
+        font-size: 11px;
+    }
+}
+@media (max-width: 463px) {
+    .findOrder input {
+        font-size: 10px;
+    }
+    .historyPage li {
+        font-size: 10px;
+    }
+}
+@media (max-width: 411px) {
+    .findOrder input {
+        font-size: 8px;
+    }
+    .historyPage li {
+        font-size: 7px;
+    }
+}

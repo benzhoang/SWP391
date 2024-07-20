@@ -1,0 +1,51 @@
+.status-chua-xu-ly {
+    background-color: #ffc107; /* Màu vàng */
+    color: #000; /* Màu chữ đen */
+}
+
+.status-chua-check-in {
+    background-color: #17a2b8; /* Màu xanh da trời */
+    color: #fff; /* Màu chữ trắng */
+}
+
+.status-da-hoan-thanh {
+    background-color: #28a745; /* Màu xanh lá cây */
+    color: #fff; /* Màu chữ trắng */
+}
+
+.status-da-huy {
+    background-color: #dc3545; /* Màu đỏ */
+    color: #fff; /* Màu chữ trắng */
+}
+@media (max-width: 653px) {
+    .nameCourt h5 {
+        font-size: 1rem !important;
+    }
+}
+@media (max-width: 610px) {
+    .img-court .w-48 {
+        width: 40% !important;
+    }
+}
+@media (max-width: 543px) {
+    .img-court {
+        width: 35% !important;
+    }
+    .order-detail p {
+        font-size: 12px;
+    }
+}
+@media (max-width: 482px) {
+    /* .img-court {
+        width: 35% !important;
+    } */
+    .nameCourt h5 {
+        font-size: 0.78rem !important;
+    }
+    .order-detail p {
+        font-size: 10px;
+    }
+    .total-price span {
+        font-size: 15px;
+    }
+}

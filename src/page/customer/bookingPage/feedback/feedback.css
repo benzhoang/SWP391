@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+PL:wght@100..400&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img {
+    width: 100%;
+    display: block;
+}
+.feedbackCus {
+    font-family: "Roboto Condensed", sans-serif;
+}
+.feedbackCus .feedback-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.feedback-title .feedback-left {
+    display: flex;
+    align-items: center;
+}
+.feedback-left i {
+    color: orangered;
+    margin: 0 5px;
+}
+.feedback-left .fb-rate {
+    background-color: orangered;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.feedback-right i {
+    font-size: 50px;
+    color: orangered;
+}
+.infomation-Customer .Customer {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+.Customer {
+    margin-bottom: 10px;
+}
+.Customer .avtCus {
+    width: 80px;
+}
+.Customer .time-rate {
+    display: flex;
+}
+.avtCus img {
+    border-radius: 50%;
+}
+.nameCus {
+    margin-left: 10px;
+}
+.infomation-Customer {
+    border-bottom: 2px solid grey;
+}
+.show-more {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.feedbackCus .fa-solid,
+.feedbackCus .fas {
+    font-weight: 900;
+    color: orangered;
+}
+@media (max-width: 994px) {
+    .feedbackCus {
+    }
+}

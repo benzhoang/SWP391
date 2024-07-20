@@ -1,0 +1,36 @@
+.form-register {
+    background-image: url("../../assets/images/background-image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+.form-register button {
+    margin: 0;
+}
+.form-register .divider {
+    margin: 10px 0;
+}
+@media (max-width: 798px) {
+    .form-register .login-form {
+        display: block;
+    }
+    .form-register .login-form .login-left,
+    .form-register .login-form .login-right {
+        width: 100%;
+    }
+    .form-register .login-form {
+        height: 700px;
+    }
+    .login-form .login-left img {
+        width: 90%;
+        margin: 0 auto;
+        height: 120px;
+    }
+}
+@media (max-width: 576px) {
+    .form-register .login-form .input-box {
+        margin: 15px 0;
+    }
+}

@@ -1,0 +1,353 @@
+.manager .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    background-color: rgba(39, 38, 38, 0.9058823529);
+    z-index: 5;
+    height: 60px;
+    position: fixed;
+}
+
+.manager .topbar .logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-content: center;
+}
+.manager .topbar .logo .logo-img {
+    width: 150px;
+}
+.manager .topbar .logo .nameapp p {
+    margin: 0;
+    font-weight: 700;
+    color: white;
+}
+
+.manager .topbar .user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-content: center;
+}
+.manager .topbar .user p {
+    margin-bottom: 0;
+    margin-left: 30px;
+}
+.manager .topbar .user img {
+    width: 50px;
+    border-radius: 50%;
+}
+.manager .body-manager {
+    display: flex;
+}
+.manager .body-manager .link {
+    font-weight: 700;
+}
+.manager .body-manager .manager-right {
+    padding: 70px;
+    width: 80%;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.manager .body-manager .manager-left {
+    padding: 80px 0;
+    width: 300px;
+    background-color: rgba(39, 38, 38, 0.9058823529);
+    transition: width 0.3s;
+    overflow: hidden;
+}
+
+.manager .body-manager .manager-left.closed {
+    width: 70px;
+}
+.manager .body-manager .manager-right {
+    flex-grow: 1;
+    padding: 70px;
+    transition: margin-left 0.3s ease-in-out;
+}
+.list-option .nav-link .title {
+    display: inline-block;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.manager-left.closed .title {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.manager .body-manager .manager-right .dash-num {
+    margin-top: 20px;
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item-left {
+    width: 80%;
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item-left h3 {
+    font-size: 30px;
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item-left p {
+    font-size: 12px;
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item-icon i {
+    font-size: 32px;
+    color: white;
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item {
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    box-shadow: rgba(0, 0, 0, 0.47) 0px 5px 15px 0px;
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item:first-child {
+    background-color: rgb(231, 38, 38);
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item:nth-child(2) {
+    background-color: green;
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item:nth-child(3) {
+    background-color: rgb(245, 175, 23);
+}
+.manager .body-manager .manager-right .dash-num .dash-num-item:last-child {
+    background-color: #183135;
+}
+.manager .body-manager .manager-right .char {
+    margin: 40px 0;
+    background-color: #f5f5f5;
+    height: 500px;
+}
+.manager .user-infor-dropdown {
+    position: absolute;
+    top: 112%;
+    right: 0;
+    width: 50%;
+    z-index: 1;
+}
+.manager .user-infor-dropdown li {
+    width: 100%;
+}
+.manager .login {
+    position: relative;
+}
+.manager .dash-num-item-left h4 {
+    font-size: 35px;
+}
+.user-infor-dropdown li a {
+    padding: 10px 0 10px 10px;
+}
+.user-infor-dropdown li:hover a {
+    color: white !important;
+    cursor: pointer;
+}
+.dashboard_manager {
+    font-size: 12px;
+}
+.dashboard_manager .newUser {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.dashboard_manager .newUser .newUser-title {
+    border-bottom: 2px solid rgba(128, 128, 128, 0.39);
+}
+.dashboard_manager .newUser-body-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid grey;
+}
+.dashboard_manager .newUser-body-right {
+    display: flex;
+    align-items: center;
+}
+.dashboard_manager .newUser-avatar {
+    width: 15%;
+    margin-right: 10px;
+}
+
+.dashboard_manager .newUser-avatar img {
+    border-radius: 50%;
+    width: 100%;
+}
+.dashboard_manager .newUser-body-infoUser {
+    font-size: 12px;
+    color: grey;
+}
+.newUser-role {
+    font-size: 12px;
+}
+.dashboard_manager thead {
+    background-color: white !important;
+}
+.dashboard_manager .hotTime thead th,
+.dashboard_manager .bookingListItem thead th {
+    background-color: white !important;
+    color: black !important;
+}
+.dashboard_manager .hotTime,
+.dashboard_manager .courtOfManager,
+.dashboard_manager .bookingList {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+}
+.yardWithCourtID {
+    background-color: #f5f5f5;
+}
+.priceBoard th {
+    background-color: #f5f5f5 !important;
+    color: black !important;
+}
+
+.services-for-court {
+    margin-top: 50px;
+}
+/* .manager-left {
+    transition: width 0.3s ease;
+}
+
+.manager-left.closed {
+    width: 70px !important;
+    overflow: hidden;
+} */
+
+.toggle-button {
+    cursor: pointer;
+    padding: 10px;
+    text-align: end;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.toggle-button i {
+    font-size: 1.5rem;
+}
+.newUser,
+.hotTime,
+.courtOfManager,
+.bookingList {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto; /* Đảm bảo các bảng có thể cuộn ngang */
+}
+.manager .login {
+    position: relative;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.edit-update-yard {
+    width: 20%;
+}
+.edit-update-yard button {
+    width: 50%;
+    height: 40px;
+}
+@media (max-width: 992px) {
+    .manager .body-manager .manager-right {
+        padding: 100px 30px;
+    }
+    .manager .list-services,
+    .services-for-court .form-group {
+        width: 70% !important;
+        margin: 10px auto;
+    }
+    #courtSelect {
+        width: 100% !important;
+    }
+}
+@media (max-width: 883px) {
+    .manager .list-services,
+    .services-for-court .form-group {
+        width: 80% !important;
+    }
+    .services-for-court p,
+    #courtSelect {
+        font-size: 13px;
+    }
+    .manager td,
+    .manager th,
+    .manager select,
+    .manager input,
+    .manager button {
+        font-size: 12px;
+    }
+    .manager .body-manager .manager-left .list-option ul li .nav-link span {
+        font-size: 10px;
+    }
+    .opAndInputYard {
+        display: block;
+    }
+    .select-court {
+        justify-content: start !important;
+        margin-bottom: 10px;
+    }
+    #edit-update-yard {
+        width: 100% !important;
+        padding-left: 0 !important;
+    }
+    .edit-update-yard button {
+        width: 70px !important;
+    }
+}
+
+@media (max-width: 820px) {
+    .manager button {
+        width: 50% !important;
+    }
+    #nameStaff {
+        width: 50% !important;
+    }
+}
+@media (max-width: 600px) {
+    .manager .body-manager .manager-left {
+        width: 70px;
+    }
+
+    .manager .body-manager .manager-left .title {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+@media (max-width: 576px) {
+    #slotInYard {
+        padding: 0;
+        margin-top: 10px;
+    }
+}
+@media (max-width: 570px) {
+    .manager .list-services,
+    .services-for-court .form-group {
+        width: 90% !important;
+    }
+    .services-for-court p,
+    .services-for-court i {
+        font-size: 11px;
+    }
+    .manager .user-name {
+        display: none;
+    }
+}
+@media (max-width: 340px) {
+    .manager .list-services,
+    .services-for-court .form-group {
+        width: 95% !important;
+    }
+
+    .manager .body-manager .manager-right {
+        padding: 100px 10px;
+    }
+}

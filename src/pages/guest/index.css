@@ -1,0 +1,83 @@
+.GuestPage .filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: 0;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+.GuestPage h3 {
+    font-size: 15px;
+}
+.GuestPage .filter #sorted {
+    width: 200px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #000000;
+}
+.GuestPage .filter a,
+.GuestPage .filter p {
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+}
+.GuestPage .filter #sorted option {
+    padding: 5px;
+}
+.GuestPage .filter .locGio {
+    position: relative;
+}
+.GuestPage .filter .locGio .filter-time {
+    display: none;
+    position: absolute;
+    background-color: rgba(31, 31, 106, 0.631372549);
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+    border: 1px solid #ccc;
+}
+.GuestPage .filter .locGio .filter-time li {
+    margin: 5px 0;
+    padding: 5px 0;
+    width: 200px;
+}
+.GuestPage .filter .locGio .filter-time li:hover {
+    background-color: #598d93;
+}
+.GuestPage .filter .locGio .filter-time a {
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+}
+.GuestPage .filter .locGio:hover .filter-time {
+    display: block;
+}
+.search-name {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    width: 100%;
+    padding-right: 40px; /* Đảm bảo đủ không gian cho biểu tượng */
+}
+
+.search-container .fa-magnifying-glass {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}

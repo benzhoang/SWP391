@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fromOrder {
+    padding: 120px 0 40px 0;
+}
+.detailOrder .button-function button {
+}
+.detailOrder .info-order,
+.detailOrder .info-customer {
+    background-color: white;
+    padding: 30px;
+    margin-left: 30px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.fromOrder tr,
+.fromOrder thead {
+    background-color: white;
+}
+.fromOrder table {
+    background-color: #f5f5f5;
+}
+.fromOrder .pay {
+    color: #002e86;
+    font-size: 18px;
+}
+.fromOrder .infoOfBooking {
+    border-top: 5px dotted rgba(128, 128, 128, 0.263);
+}
+.orderDetailPage .pagination button.active {
+    background-color: #002e86 !important;
+    color: black;
+}
+@media (max-width: 768px) {
+    .fromOrder .info-customer {
+        margin: 20px 0 0 0;
+    }
+    .fromOrder {
+        width: 100vh;
+        padding: 300px 50px;
+    }
+    .fromOrder .info-order {
+        margin: 0;
+    }
+    .button-function {
+        width: 100% !important;
+    }
+}

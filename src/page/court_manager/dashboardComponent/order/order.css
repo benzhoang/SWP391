@@ -1,0 +1,36 @@
+.manager table {
+    min-width: 700px;
+}
+.orderManager button {
+    width: 100% !important;
+}
+@media (max-width: 992px) {
+    .orderManager .nav-status .nav-link,
+    #findOrder,
+    .orderManager th,
+    .orderManager td,
+    .orderManager select,
+    .orderManager {
+        font-size: 12px;
+    }
+}
+@media (max-width: 540px) {
+    .orderManager .nav-status .nav-link,
+    #findOrder,
+    .orderManager th,
+    .orderManager td,
+    .orderManager select,
+    .orderManager {
+        font-size: 10px;
+    }
+}
+@media (max-width: 400px) {
+    .orderManager .nav-status .nav-link,
+    #findOrder,
+    .orderManager th,
+    .orderManager td,
+    .orderManager select,
+    .orderManager .pills-tabContent {
+        font-size: 7px;
+    }
+}

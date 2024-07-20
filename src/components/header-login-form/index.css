@@ -1,0 +1,43 @@
+.header-login-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    background-color: rgba(46, 51, 48, 0.7882352941);
+    color: white;
+}
+.header-login-form .header-login-form-left {
+    display: flex;
+    align-items: center;
+}
+.header-login-form .header-login-form-left .logo-header-login {
+    width: 20%;
+}
+.header-login-form .header-login-form-left .name-page p {
+    font-size: 22px;
+}
+.header-login-form .header-login-form-right a {
+    color: white;
+    font-size: 20px;
+}
+.header-login-form .header-login-form-right a:hover {
+    color: orange;
+}
+@media (max-width: 600px) {
+    .header-login-form .header-login-form-right a {
+        color: white;
+        font-size: 13px;
+    }
+    .header-login-form .header-login-form-left .name-page p {
+        font-size: 16px;
+    }
+}
+@media (max-width: 404px) {
+    .header-login-form .header-login-form-right a {
+        color: white;
+        font-size: 10px;
+    }
+    .header-login-form .header-login-form-left .name-page p {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,121 @@
+/* Styles for the slot times */
+.slot-time {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for slot times */
+.slot-time:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for selected slots */
+.slot-time.selected {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+/* Styles for booked slots */
+.slot-time.booked {
+    background-color: #ff4d4d;
+    color: white;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.slot-time.waiting-check-in {
+    background-color: #126abd;
+    color: white;
+    cursor: not-allowed;
+}
+
+.slot-time.pending {
+    background-color: #bd1220;
+    color: white;
+    cursor: not-allowed;
+}
+
+.slot-time.completed {
+    background-color: green;
+    color: white;
+    cursor: not-allowed;
+}
+
+.slot-time.cancel {
+    background-color: rgba(193, 18, 18, 0.73);
+    color: white;
+    cursor: not-allowed;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 10px 10px; /* Adjust the size of the stripes */
+}
+
+
+/* .slot-time.normal {
+    background-color: rgb(167, 194, 146);
+    color: white;
+    cursor: not-allowed;
+    pointer-events: none;
+} */
+
+/* Styles for past times */
+.slot-time.pastTime {
+    background-color: rgba(128, 128, 128, 0.73);
+    color: white;
+    cursor: not-allowed;
+    pointer-events: none; /* Disable pointer events */
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 10px 10px; /* Adjust the size of the stripes */
+}
+
+.slot-time.yesterday {
+    background-color: rgba(128, 128, 128, 0.73);
+    color: white;
+    cursor: not-allowed;
+    pointer-events: none; /* Disable pointer events */
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 10px 10px; /* Adjust the size of the stripes */
+}
+
+.modalPriceBoard div {
+    margin: 10px 0;
+}
+.modalPriceBoard div strong {
+    color: red;
+}
+
+.slot-time {
+    height: 90%;
+    width: 90%;
+}
+.detail-yard {
+    padding: 150px 0 50px 0;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    outline: none;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.tabs button.active {
+    background-color: #007bff;
+    color: white;
+}
+

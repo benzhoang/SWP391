@@ -1,0 +1,241 @@
+{
+  "court": [
+    {
+      "court_name": "Sân cầu lông Bình Minh 1",
+      "address": "Điện Biên Phủ, Quận 2",
+      "open_time": "8:00",
+      "close_time": "24:00",
+      "numberOfCourt": "5",
+      "rate": "",
+      "user_id": "",
+      "imgURL": "blob:http://localhost:3001/abdcfbeb-54ae-495a-9bee-761029062196",
+      "id": "adf0"
+    },
+    {
+      "court_name": "CLB Cầu lông ABC",
+      "address": "Viet Nam",
+      "open_time": "7:00",
+      "close_time": "24:00",
+      "numberOfCourt": "5",
+      "rate": "",
+      "user_id": "",
+      "imgURL": "blob:http://localhost:3006/5bfd16bd-69ef-4cd1-b1a8-58a7dab4f7a0",
+      "id": "fe3b"
+    },
+    {
+      "court_name": "CLB Cầu lông Phú Hữu",
+      "address": "Phường Phú Hữu, TP.Thủ Đức",
+      "open_time": "6:00",
+      "close_time": "20:00",
+      "numberOfCourt": "4",
+      "rate": "",
+      "user_id": "",
+      "imgURL": {},
+      "id": "f766"
+    }
+  ],
+  "staff": [
+    {
+      "court_id": "f766",
+      "full_name": "Huynh Anh",
+      "phone_number": "0773866692",
+      "email": "anhhtqse172169@fpt.edu.vn",
+      "profile_picture": "blob:http://localhost:3001/4b53c861-b60e-462a-83c9-804a9761b7e5",
+      "id": "297a"
+    },
+    {
+      "court_id": "f766",
+      "full_name": "Nguyễn An Lành",
+      "phone_number": "0584637583",
+      "email": "anhlanh123222@gmail.com",
+      "profile_picture": "blob:http://localhost:3001/f48cc011-ea34-42f9-98cf-6182d032b507",
+      "id": "4a50"
+    },
+    {
+      "court_id": "adf0",
+      "full_name": "Hoàng Xuân Hương",
+      "phone_number": "0695858763",
+      "email": "huong123@gmail.com",
+      "profile_picture": "blob:http://localhost:3001/d0cccddc-6ccf-4e82-848c-9f8c951263bb",
+      "id": "e438"
+    },
+    {
+      "id": "eeed",
+      "court_id": "adf0",
+      "full_name": "Nguyễn Cửu Chương",
+      "phone_number": "0988765763",
+      "email": "123@gmai.com",
+      "profile_picture": ""
+    },
+    {
+      "court_id": "fe3b",
+      "full_name": "Huỳnh Thị Anh",
+      "phone_number": "0773866692",
+      "email": "Ushiohuynh123@gmail.com",
+      "profile_picture": "",
+      "id": "e965"
+    }
+  ],
+  "slot": [
+    {
+      "id": "1",
+      "slot_name": "Slot 1",
+      "start_time": "8:00",
+      "end_time": "9:00",
+      "price": "75000",
+      "yard_id": [],
+      "court_id": "adf0"
+    },
+    {
+      "id": "2",
+      "slot_name": "Slot 2",
+      "start_time": "9:00",
+      "end_time": "10:00",
+      "price": "80000",
+      "yard_id": [],
+      "court_id": "adf0"
+    },
+    {
+      "slot_name": "Slot 1",
+      "start_time": "9:00",
+      "end_time": "10:00",
+      "price": "70000",
+      "yard_id": [],
+      "court_id": "fe3b",
+      "id": "3"
+    },
+    {
+      "id": "4",
+      "slot_name": "Slot 1",
+      "start_time": "9:00",
+      "end_time": "10:00",
+      "price": "75000",
+      "yard_id": [],
+      "court_id": "f766"
+    },
+    {
+      "id": "180d",
+      "slot_name": "Slot 3",
+      "start_time": "11:00",
+      "end_time": "12:00",
+      "price": "75000",
+      "yard_id": [],
+      "court_id": "adf0"
+    }
+  ],
+  "yard": [
+    {
+      "id": "5267",
+      "yard_name": "Sân BM1",
+      "court_id": "adf0",
+      "slots": [
+        {
+          "id": "1",
+          "slot_name": "Slot 1",
+          "start_time": "8:00",
+          "end_time": "9:00",
+          "price": "75000",
+          "yard_id": [],
+          "court_id": "adf0"
+        },
+        {
+          "id": "2",
+          "slot_name": "Slot 2",
+          "start_time": "9:00",
+          "end_time": "10:00",
+          "price": "80000",
+          "yard_id": [],
+          "court_id": "adf0"
+        }
+      ]
+    },
+    {
+      "id": "c9fa",
+      "yard_name": "Sân a",
+      "court_id": "fe3b",
+      "slots": [
+        {
+          "slot_name": "Slot 1",
+          "start_time": "9:00",
+          "end_time": "10:00",
+          "price": "70000",
+          "yard_id": [],
+          "court_id": "fe3b",
+          "id": "3"
+        },
+        {
+          "id": "2",
+          "slot_name": "Slot 2",
+          "start_time": "9:00",
+          "end_time": "10:00",
+          "price": "80000",
+          "yard_id": [],
+          "court_id": "adf0"
+        },
+        {
+          "id": "180d",
+          "slot_name": "Slot 3",
+          "start_time": "11:00",
+          "end_time": "12:00",
+          "price": "75000",
+          "yard_id": [],
+          "court_id": "adf0"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "servicesName": "Trà đá miễn phí",
+      "servicesIcon": "fa-solid fa-bottle-water",
+      "id": "6355"
+    },
+    {
+      "servicesName": "Có bãi giữ xe ô tô",
+      "servicesIcon": "fa-solid fa-square-parking",
+      "id": "3e46"
+    },
+    {
+      "servicesName": "Wi-Fi miễn phí",
+      "servicesIcon": "fa-solid fa-wifi",
+      "id": "6ab5"
+    },
+    {
+      "servicesName": "Có tiệm cà phê",
+      "servicesIcon": "fa-solid fa-mug-hot",
+      "id": "bb88"
+    },
+    {
+      "servicesName": "Nhà tắm rộng rãi",
+      "servicesIcon": "fa-solid fa-shower",
+      "id": "8d33"
+    },
+    {
+      "servicesName": "Có điều hòa mát lạnh",
+      "servicesIcon": "fa-solid fa-snowflake",
+      "id": "7739"
+    }
+  ],
+  "order": [
+    {
+      "booking_id": "B001",
+      "user_id": "C001",
+      "booking_type": "Cố định",
+      "booking_date": "14-5-2003",
+      "discount": "",
+      "total_price": "790.000",
+      "status": "Delay",
+      "id": "b52e"
+    },
+    {
+      "booking_id": "B002",
+      "user_id": "C002",
+      "booking_type": "Ngày",
+      "booking_date": "16-5-2003",
+      "discount": "",
+      "total_price": "70.000",
+      "status": "Chờ check in",
+      "id": "f14e"
+    }
+  ]
+}

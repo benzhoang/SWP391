@@ -1,0 +1,55 @@
+/* Banner Component */
+.banner {
+    background-image: url("../../assets/images/background-image.jpg");
+    height: 700px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    position: relative;
+}
+.banner::before {
+    position: absolute;
+    content: "";
+    background-color: rgba(0, 0, 0, 0.37);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.banner .banner-intro {
+    width: 40%;
+    position: absolute;
+    top: 60%;
+    left: 90px;
+    transform: translateY(-50%);
+}
+.banner .banner-intro h1 {
+    color: rgb(243, 128, 86) !important;
+    font-weight: 700;
+    font-size: 40px;
+}
+.banner .banner-intro h3 {
+    margin: 20px 0;
+    line-height: 30px;
+    color: white;
+}
+.banner .banner-intro span {
+    color: #3dd9e9;
+    font-weight: 700;
+    font-size: 20px;
+}
+.banner .banner-intro .btn-link {
+    background-image: linear-gradient(to right, #8360c3, #2ebf91);
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.banner .banner-intro .btn-link:hover {
+    background-position: 305px;
+    transition: 1s;
+}

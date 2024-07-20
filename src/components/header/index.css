@@ -1,0 +1,245 @@
+.header {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    background-color: rgba(39, 38, 38, 0.9058823529);
+}
+.header .header-top {
+    color: #eeeded;
+
+    margin: 0 auto;
+}
+
+.header .header-top .logo img {
+    width: 150px;
+}
+.header .header-top .header-top-right {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.header .header-top .header-top-right .login {
+}
+.header .header-top .header-top-right .login .user-info a {
+    padding: 10px 15px;
+    margin: 0 10px;
+    font-size: 15px;
+}
+.header .header-top .header-top-right .login .user {
+    width: 70%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.header .header-top .header-top-right .login .user img {
+    border-radius: 50%;
+}
+.header .header-top .header-top-right .login .user-name {
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+.header .header-top .header-top-right .login .logout:hover,
+.header .header-top .header-top-right .login .register:hover {
+    background-color: #1f1f6a;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+.header .header-top .header-top-right .list-location > p {
+    animation: location 1s infinite alternate;
+}
+.header .header-top .header-top-right .list-location:hover #location {
+    display: block;
+    z-index: 2;
+}
+.header .header-top .header-top-right .location-item {
+    position: relative;
+    transition: 10s;
+}
+.header .header-top .header-top-right .location-item #location {
+    position: absolute;
+    background-color: #eeeded;
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    display: none;
+    color: #000000;
+    right: 0;
+    transition: 10s;
+}
+.header .header-top .header-top-right .location-item ul {
+    padding: 0;
+}
+.header .header-top .header-top-right .location-item li {
+    border-bottom: 1px solid grey;
+    padding: 10px 20px;
+    width: 100% !important;
+}
+.header .header-top .header-top-right .location-item li:hover {
+    background-color: #1f1f6a;
+}
+.header .header-top .header-top-right .location-item li:hover a {
+    color: white;
+    width: 100%;
+}
+@keyframes location {
+    0% {
+        color: #eeeded;
+    }
+    100% {
+        color: red;
+    }
+}
+
+.header .header-bot {
+    text-align: center;
+    border-top: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-bot a {
+    color: white;
+}
+.header .header-bot a,
+.header .header-bot p {
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+}
+.header .header-bot a::before,
+.header .header-bot p::before {
+    position: absolute;
+    content: "";
+    bottom: -10px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #1f1f6a;
+}
+.header .header-bot a:hover,
+.header .header-bot p:hover {
+    color: #6bc4e7;
+}
+.header .header-bot a:hover::before,
+.header .header-bot p:hover::before {
+    width: 100%;
+    transition: 0.5s;
+}
+.header .header-bot a.active {
+    color: #6bc4e7;
+}
+.header .header-bot a.active::before {
+    width: 100%;
+}
+
+.user-name {
+    margin-top: 30px;
+}
+.header-top-right .user-info {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    justify-content: end;
+}
+
+.user-infor-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background-color: aliceblue;
+}
+.user-infor-dropdown ul li i {
+    margin-right: 10px;
+}
+.user-info i {
+    color: black;
+}
+.user-infor-dropdown li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    width: 250px;
+    color: black;
+}
+
+.user-infor-dropdown li:hover {
+    background-color: #1f1f6a;
+}
+.user-infor-dropdown li:hover a,
+.user-infor-dropdown li:hover i,
+.user-infor-dropdown li:hover button {
+    transition: 0.2s;
+    color: #eeeded;
+}
+.user-infor-dropdown li a,
+.user-infor-dropdown li button {
+    color: black;
+    width: 100%;
+}
+.auth-buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 10px 0;
+}
+@media (max-width: 768px) {
+    .header .header-top .header-top-right .login .user-name {
+        display: block !important;
+    }
+    .banner .banner-intro {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 1400px) {
+    .header .header-bot a,
+    .header .header-bot p {
+        font-size: 13px;
+    }
+    .auth-buttons a {
+        padding: 5px 0;
+        font-size: 14px;
+    }
+}
+@media (max-width: 992px) {
+    .header .header-top .header-top-right .login .user-name {
+        display: none;
+    }
+    .header .header-top .logo {
+        display: flex;
+        justify-content: center;
+    }
+    .header .header-bot {
+        border-top: none;
+    }
+    .auth-buttons {
+        margin-left: 0;
+    }
+    .header .header-top .header-top-right .login .user {
+        width: 100%;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .header .header-top .header-top-right .login .user {
+        width: 100%;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media (min-width: 576px) {
+    .container,
+    .container-sm {
+        max-width: 700px;
+    }
+}

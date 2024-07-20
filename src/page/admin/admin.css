@@ -1,0 +1,71 @@
+.sidebar-item ul li button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+}
+/* admin.css */
+.admin {
+    font-size: 13px;
+}
+.admin h4 {
+    font-size: 30px;
+}
+.admin .nav-item.active .nav-link {
+    background-color: #f3f4f6;
+    font-weight: bold;
+    color: #333;
+    border-left: 3px solid #2563eb;
+    width: 100%;
+}
+.admin-db .tk-item {
+    background-color: #f3f4f6;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: 0.5s;
+    font-size: 14px;
+}
+
+.admin-db .tk-icon {
+    width: 70px;
+    height: 70px;
+    background-color: #2563eb;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    justify-content: center;
+    color: white;
+    border-radius: 50%;
+}
+.tk-number {
+    text-align: end;
+}
+.tk-number h4 {
+    font-size: 35px;
+}
+.admin-db .listItem div {
+    background-color: white;
+    padding: 5px;
+}
+.listItem > div {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 10px;
+}
+.admin-db .listItem h4 {
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.452);
+}
+.admin-db .newUser-body-item,
+.newCourt-body-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
