@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import { showAlert, showConfirmAlert } from "../../utils/alertUtils";
 import { handleTokenError } from "../../utils/tokenErrorHandle";
+import { Link } from "react-router-dom";
+import { remove } from 'diacritics';
 
 export default class Staff extends Component {
     state = {
@@ -132,16 +134,20 @@ export default class Staff extends Component {
         showConfirmAlert("Xác nhận xóa", "Bạn có chắc chắn muốn xóa nhân viên này không?", "Xóa", "center").then((result) => {
             if (result.isConfirmed) {
                 const { selectedCourtId } = this.state;
-                const deleteUrl = selectedCourtId ? `/court/${selectedCourtId}/deleteStaffFromCourt/${staffId}` : `/member/delete?userId=${staffId}`;
+
+                if (!selectedCourtId) {
+                    showAlert("error", "Lỗi !", "Chưa chọn sân để xóa nhân viên", "top-end");
+                    return;
+                }
+
+                const deleteUrl = `court/${selectedCourtId}/deleteStaffFromCourt/${staffId}`;
 
                 axiosInstance
                     .delete(deleteUrl)
                     .then((res) => {
                         if (res.status === 200) {
                             showAlert("success", "", "Đã xóa nhân viên thành công", "top-end");
-
-                            selectedCourtId ? this.fetchStaffWithCourt(selectedCourtId) : this.fetchAllStaff();
-                            this.fetchStaffWithCourt();
+                            this.fetchStaffWithCourt(selectedCourtId);
                         } else {
                             showAlert("error", "Lỗi !", "Xóa nhân viên không thành công", "top-end");
                             console.error("Response không thành công:", res.status);
@@ -149,7 +155,7 @@ export default class Staff extends Component {
                     })
                     .catch((error) => {
                         handleTokenError(error);
-                        showAlert("error", "", "Không thể xóa được sân", "top-end");
+                        showAlert("error", "", "Không thể xóa được nhân viên này", "top-end");
                     });
             }
         });
@@ -196,7 +202,11 @@ export default class Staff extends Component {
     renderStaff = () => {
         const { staffs, currentPage, itemsPerPage, searchInput, selectedCourtId } = this.state;
 
-        const filteredStaffs = staffs.filter((staff) => staff.fullName && staff.fullName.toLowerCase().includes(searchInput.toLowerCase()));
+        const filteredStaffs = staffs.filter((staff) => {
+            const searchInputNormalized = remove(searchInput.toLowerCase());
+            const staffNameNormalized = remove(staff.fullName.toLowerCase());
+            return staffNameNormalized.includes(searchInputNormalized) || staff.userId.includes(searchInputNormalized);
+          });
 
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -207,8 +217,8 @@ export default class Staff extends Component {
                 currentStaffs.map((staff, index) => (
                     <tr key={staff.userId}>
                         <td className="text-center">{indexOfFirstItem + index + 1}</td>
-                        <td>
-                            <img className="" src={staff.profileAvatar} style={{ width: 50, height: 50 }} alt="Avatar" />
+                        <td className="">
+                            <img className="" src={staff.profileAvatar} style={{ width: "50%", height: 50, margin: "auto" }} alt="Avatar" />
                         </td>
                         <td className="text-center">
                             <p>{staff.userId}</p>
@@ -254,9 +264,9 @@ export default class Staff extends Component {
                 <ul className="pagination">
                     {pageNumbers.map((number) => (
                         <li key={number} className={`page-item ${currentPage === number ? "active" : ""}`}>
-                            <a onClick={() => this.handlePageChange(number)} className="page-link">
+                            <Link to="" onClick={() => this.handlePageChange(number)} className="page-link">
                                 {number}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>

@@ -69,7 +69,9 @@ class GuestPage extends Component {
                     <Header isLoggedIn={isLoggedIn} user={user} handleLogout={this.handleLogout} />
                 </section>
                 <Banner scrollToCourtList={this.scrollToCourtList} />
-                <CourtList /> {/* Truyền searchKeyword vào CourtList */}
+                <div className="container">
+                    <CourtList /> {/* Truyền searchKeyword vào CourtList */}
+                </div>
                 <Footer />
             </div>
         );

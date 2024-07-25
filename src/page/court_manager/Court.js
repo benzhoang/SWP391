@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { showAlert, showConfirmAlert } from "../../utils/alertUtils";
 import axiosInstance from "../../config/axiosConfig";
 import { handleTokenError } from "../../utils/tokenErrorHandle";
+import { Link } from "react-router-dom";
 
 export default class extends Component {
     state = {
         courts: [],
         newCourt: {
-            courtId: "",
-            courtName: "",
             courtId: "",
             courtName: "",
             address: "",
@@ -19,6 +18,8 @@ export default class extends Component {
             beginDate: "",
         },
         isDetailView: false,
+        currPage: "",
+        courtPerPage: 5,
     };
 
     componentDidMount() {
@@ -213,6 +214,31 @@ export default class extends Component {
         return stars;
     }
 
+    handlePageChange = (pageNum) => {
+        this.setState({ currPage: pageNum });
+    };
+
+    pagination = () => {
+        const { currPage, courtPerPage, courts } = this.state;
+        const page = [];
+        for (let i = 1; i <= Math.ceil(courts.length / courtPerPage); i++) {
+            page.push(i);
+        }
+
+        return (
+            <nav>
+                <ul className="pagination">
+                    {page.map((number) => (
+                        <li key={number} className={`page-item ${currPage === number ? "active" : ""}`}>
+                            <button onClick={() => this.handlePageChange(number)} className="page-link">
+                                {number}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        );
+    };
     render() {
         return (
             <div>
@@ -356,6 +382,7 @@ export default class extends Component {
                             </tbody>
                         </table>
                     </div>
+                    {this.pagination()}
                 </div>
                 <br />
 

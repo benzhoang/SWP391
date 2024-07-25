@@ -5,7 +5,7 @@
 }
 
 .historyPage-body {
-    padding: 200px 0 100px 0;
+    padding: 120px 0 100px 0;
 }
 .nav-status {
     background-color: #ffffff;
@@ -14,7 +14,7 @@
     color: black;
 }
 .nav-status .nav-link.active {
-    background-color: transparent;
+    background-color: #f5f5f5;
     position: relative;
     color: #002e86;
     font-weight: 600;
@@ -122,6 +122,22 @@
     text-align: center;
     margin-top: 20px;
     color: #999;
+}
+#dropdown-basic-button {
+    height: 45.6px;
+    background-color: black;
+    border: none;
+    width: 50px;
+    margin-left: 10px;
+    padding: 0;
+}
+#dropdown-basic-button svg {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+.dropdown-toggle::after {
+    color: white;
 }
 @media (max-width: 886px) {
     .historyPage {

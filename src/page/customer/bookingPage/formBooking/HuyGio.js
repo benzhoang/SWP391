@@ -12,13 +12,14 @@ const HuyGio = ({ priceList, courtId, onHoursCancel }) => {
     const [flexibleBookings, setFlexibleBookings] = useState([]);
     const [availableHours, setAvailableHours] = useState(0);
     const [usedHours, setUsedHours] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const user = JSON.parse(localStorage.getItem("user"));
     const price = priceList ? priceList.flexibleBookingPrice : 0;
 
     useEffect(() => {
         const lastDay = new Date(currentDate.getFullYear(), currentMonth, 0);
-        const formattedLastDay = `${lastDay.getDate()}/${currentMonth}/${lastDay.getFullYear()}`;
+        const formattedLastDay = `${lastDay.getDate()}/${currentMonth}/${lastDay.getFullYear()} 23:59:59`;
         setExpirationDate(formattedLastDay);
     }, [currentMonth]);
 
@@ -100,8 +101,9 @@ const HuyGio = ({ priceList, courtId, onHoursCancel }) => {
             let response;
 
             if (transferType === 'transfer') {
+                setLoading(true);
                 response = await axiosInstance.post(`/booking/${courtId}/flexible-bookings/transfer-next-month`);
-
+                setLoading(false);
                 if (response.data.message === 'Transfer hours to next month successful') {
                     alert('success', 'Thông báo', `Đã chuyển ${availableHours} giờ còn lại vào tháng ${currentMonth + 1} thành công !`, 'center');
                     onHoursCancel();
@@ -129,12 +131,12 @@ const HuyGio = ({ priceList, courtId, onHoursCancel }) => {
 
                     saleIdAndRefundAmount[saleId] = ((availableHours * pricePerHour) / exchangeRate).toString();
                 });
-
+                setLoading(true);
                 const refundResponse = await axiosInstance.post(`/paypal/refund/flexible-booking`, saleIdAndRefundAmount);
 
                 if (refundResponse.data.message === 'Refund successful') {
                     response = await axiosInstance.post(`/booking/${courtId}/flexible-bookings/cancel`);
-
+                    setLoading(false);
                     if (response.data.message === 'Cancel hours successful') {
                         alert('success', 'Thông báo', `Đã hủy ${availableHours} giờ còn lại thành công ! Số tiền đã được hoàn lại vào tài khoản Paypal của bạn.`, 'center');
                         onHoursCancel();

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../booking.css";
 import axiosInstance from "../../../../config/axiosConfig";
+import Spinner from "../../../../components/snipper";
 
 const NapGio = ({ priceList, courtId }) => {
     const currentDate = new Date();
@@ -10,13 +11,14 @@ const NapGio = ({ priceList, courtId }) => {
     const [expirationDate, setExpirationDate] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
     const [priceColor, setPriceColor] = useState('#333');
+    const [loading, setLoading] = useState(false);
 
     const user = JSON.parse(localStorage.getItem("user"));
     const price = priceList ? priceList.flexibleBookingPrice : 0;
 
     useEffect(() => {
         const lastDay = new Date(currentDate.getFullYear(), currentMonth, 0);
-        const formattedLastDay = `${lastDay.getDate()}/${currentMonth}/${lastDay.getFullYear()}`;
+        const formattedLastDay = `${lastDay.getDate()}/${currentMonth}/${lastDay.getFullYear()} 23:59:59`;
         setExpirationDate(formattedLastDay);
     }, [currentMonth]);
 
@@ -35,7 +37,9 @@ const NapGio = ({ priceList, courtId }) => {
         event.preventDefault();
         
         try {
+            setLoading(true);
             const response = await axiosInstance.post(`/booking/${courtId}/flexible/${hours}`);
+            setLoading(false);
             localStorage.setItem("booking", JSON.stringify(response.data));
             window.location.href = "/detailBooking";
         } catch (error) {
@@ -45,6 +49,7 @@ const NapGio = ({ priceList, courtId }) => {
 
     return (
         <div className="nap-gio-form">
+            {loading && <Spinner />}
             <h2>Đăng ký tổng số giờ chơi tháng {currentMonth}</h2>
             <form>
                 <div className="form-group">

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.275e1008.css",
+    "main.js": "/static/js/main.7464fb09.js",
+    "static/media/forbad_logo.png": "/static/media/forbad_logo.bc4673b96a489c9b8a01.png",
+    "static/media/background-image.jpg": "/static/media/background-image.61ffdb8b514218141bc8.jpg",
+    "static/media/spin.svg": "/static/media/spin.36453e4efe278a4e8ec9deace1c57cf5.svg",
+    "index.html": "/index.html",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "main.275e1008.css.map": "/static/css/main.275e1008.css.map",
+    "main.7464fb09.js.map": "/static/js/main.7464fb09.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.275e1008.css",
+    "static/js/main.7464fb09.js"
+  ]
+}

@@ -38,6 +38,7 @@ export default function Booking() {
     const { court } = location.state || {};
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const user = JSON.parse(localStorage.getItem("user"));
 
         if (user) {
@@ -137,7 +138,7 @@ export default function Booking() {
                         SÂN MỚI - TRẢI NGHIỆM MỚI
                     </h1>
                     <section className="yard">
-                        <div className="container w-4/5">
+                        <div className="">
                             <Slider {...settings} className="list-yard">
                                 {latestCourts.slice(0, 12).map((court) => (
                                     <CardYard key={court.courtId} court={court} />

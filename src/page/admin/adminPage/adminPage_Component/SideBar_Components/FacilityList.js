@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { showAlert, showConfirmAlert } from "../../../../../utils/alertUtils";
 import axiosInstance from "../../../../../config/axiosConfig";
 import { handleTokenError } from "../../../../../utils/tokenErrorHandle";
+import { remove } from 'diacritics';
 
 export default function FacilityList() {
     const [facilities, setFacilities] = useState([]);
@@ -43,7 +44,15 @@ export default function FacilityList() {
     const indexOfFirstFacility = indexOfLastFacility - facilitiesPerPage;
 
     //search
-    const filteredFacilities = facilities.filter((facility) => facility.courtName.toLowerCase().includes(searchTerm.toLowerCase()));
+    //const filteredFacilities = facilities.filter((facility) => facility.courtName.toLowerCase().includes(searchTerm.toLowerCase()));
+    //More accurated search
+    const filteredFacilities = facilities.filter((facility) => {
+        const searchTermNormalized = remove(searchTerm.toLowerCase());
+        const courtNameNormalized = remove(facility.courtName.toLowerCase());
+      
+        return courtNameNormalized.includes(searchTermNormalized) || facility.courtId.includes(searchTermNormalized);
+      });
+
     const currentFacilities = filteredFacilities.slice(indexOfFirstFacility, indexOfLastFacility);
 
     const handleSearchChange = (e) => {

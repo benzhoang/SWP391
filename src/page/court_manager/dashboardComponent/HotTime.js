@@ -74,10 +74,8 @@ const HotTime = () => {
     };
 
     return (
-        <div className="overscroll-x-auto">
-            <div className="chart-container" style={{ width: "100%", height: "100%" }}>
-                <Line data={data} options={options} />
-            </div>
+        <div className="chart-container">
+            <Line data={data} options={options} />
         </div>
     );
 };

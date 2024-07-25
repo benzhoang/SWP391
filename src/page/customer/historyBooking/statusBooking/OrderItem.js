@@ -7,11 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faCheckCircle, faTimesCircle, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "./orderItem.css";
+import Spinner from "../../../../components/snipper";
 
 const OrderItem = ({ booking, onBookingCancel }) => {
     const [showModal, setShowModal] = useState(false);
     const [rating, setRating] = useState(0);
     const [feedback, setFeedback] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {}, [booking]);
 
@@ -44,8 +46,9 @@ const OrderItem = ({ booking, onBookingCancel }) => {
                         if (booking && booking.bookingType === "Lịch linh hoạt") {
                             const bookingId = booking?.bookingId;
 
+                            setLoading(true);
                             const cancelResponse = await axiosInstance.post(`/booking/${bookingId}/cancel`);
-
+                            setLoading(false);
                             if (cancelResponse.data.message === "Đã hủy đơn hàng thành công.") {
                                 alert(
                                     "success",
@@ -70,13 +73,14 @@ const OrderItem = ({ booking, onBookingCancel }) => {
 
                         const refundAmount = booking?.payment?.paymentAmount / exchangeRate;
 
+                        setLoading(true);
                         const refundResponse = await axiosInstance.post(`/paypal/refund/${saleId}/${refundAmount}`);
 
                         if (refundResponse.data.message === "Refund successful") {
                             const bookingId = booking?.bookingId;
 
                             const cancelResponse = await axiosInstance.post(`/booking/${bookingId}/cancel`);
-
+                            setLoading(false);
                             if (cancelResponse.data.message === "Đã hủy đơn hàng thành công.") {
                                 alert(
                                     "success",
@@ -111,6 +115,10 @@ const OrderItem = ({ booking, onBookingCancel }) => {
                 return "#008000"; // Màu xanh lá cây
             case "Đã hủy":
                 return "#FF0000"; // Màu đỏ
+            case "Đã thanh toán":
+                return "#008000";
+            case "Đã hoàn tiền":
+                return "#FFA500";
             default:
                 return "#000"; // Màu mặc định
         }
@@ -133,6 +141,7 @@ const OrderItem = ({ booking, onBookingCancel }) => {
 
     return (
         <div className="orderItemList">
+            {loading && <Spinner />}
             <div className="orderItem mt-4" style={{ boxShadow: " rgba(0, 0, 0, 0.24) 0px 3px 8px", borderRadius: 10 }}>
                 <div className="orderItem-header">
                     <div className="nameCourt">
@@ -184,7 +193,7 @@ const OrderItem = ({ booking, onBookingCancel }) => {
                     </div>
                 </div>
                 <div className="orderItem-btn w-50 m-auto">
-                    {booking.statusEnum !== "Đã hủy" && booking.statusEnum !== "Đã hoàn thành" && (
+                    {booking.statusEnum !== "Đã hủy" && booking.statusEnum !== "Đã hoàn thành" && booking.statusEnum !== "Đang chờ check-in" && (
                         <button className="btn" onClick={() => handleCancelBooking(booking)}>
                             Hủy đơn
                         </button>
@@ -210,6 +219,7 @@ const OrderItem = ({ booking, onBookingCancel }) => {
                                         <th>Sân</th>
                                         <th>{booking.totalPrice === 0 ? "Giờ" : "Giá (VND)"}</th>
                                         <th>Trạng thái</th>
+                                        <th>Trạng thái thanh toán</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -220,8 +230,9 @@ const OrderItem = ({ booking, onBookingCancel }) => {
                                                 <td>{bookingDetail.yardSchedule.slot.slotName}</td>
                                                 <td>{bookingDetail.date}</td>
                                                 <td>{bookingDetail.yardSchedule.yard.yardName}</td>
-                                                <td>{booking.totalPrice === 0 ? `1 giờ` : bookingDetail.price.toLocaleString("vi-VN")}</td>
-                                                <td style={{ color: getStatusTextColor(booking.statusEnum) }}>{bookingDetail.status}</td>
+                                                <td>{booking.totalPrice === 0 ? bookingDetail.flexibleHours : bookingDetail.price.toLocaleString("vi-VN")}</td>
+                                                <td style={{ color: getStatusTextColor(bookingDetail.status) }}>{bookingDetail.status}</td>
+                                                <td><td style={{ color: getStatusTextColor(bookingDetail.paymentStatus) }}>{bookingDetail.paymentStatus}</td></td>
                                             </tr>
                                         ))}
                                     {booking.totalPrice === 0 ? (
@@ -231,7 +242,7 @@ const OrderItem = ({ booking, onBookingCancel }) => {
                                             </td>
                                             <td colSpan="2"></td>
                                             <td style={{ color: "green", fontWeight: "bold" }}>
-                                                {booking.totalPrice === 0 ? `${booking.bookingDetails.length} giờ` : `0 giờ`}
+                                                {booking.totalPrice === 0 ? `${booking.totalHours} giờ` : `0 giờ`}
                                             </td>
                                         </tr>
                                     ) : (

@@ -18,8 +18,9 @@ const NewOrder = ({ setOrderCount, setTotalRevenue }) => {
                     const ordersData = res.data;
                     const sortedOrders = sortOrdersByDate(ordersData);
                     priceOrderByMonth(sortedOrders);
-                    const latestOrders = getLatestOrders(sortedOrders);
-                    setOrders(latestOrders);
+                    const newOrder = sortedOrders.filter((or) => or.statusEnum === "Đang chờ xử lý");
+
+                    setOrders(newOrder);
                 } else {
                     showAlert("error", "Lỗi !", "Không lấy được dữ liệu", "top-end");
                 }
@@ -40,9 +41,9 @@ const NewOrder = ({ setOrderCount, setTotalRevenue }) => {
         return allOrders.sort((a, b) => new Date(b.bookingDate) - new Date(a.bookingDate));
     };
 
-    const getLatestOrders = (sortedOrders) => {
-        return sortedOrders.slice(0, 5);
-    };
+    // const getLatestOrders = (sortedOrders) => {
+    //     return sortedOrders.slice(0, 5);
+    // };
 
     const priceOrderByMonth = (orders) => {
         const currentMonth = new Date().getMonth() + 1;
@@ -56,7 +57,7 @@ const NewOrder = ({ setOrderCount, setTotalRevenue }) => {
             const bookingMonth = bookingDate.getMonth() + 1;
             const bookingYear = bookingDate.getFullYear();
 
-            if (bookingMonth === currentMonth && bookingYear === currentYear) {
+            if (bookingMonth === currentMonth && bookingYear === currentYear && order.statusEnum !== "Đã hủy") {
                 totalRevenue += order.totalPrice;
                 totalOrders += 1;
             }

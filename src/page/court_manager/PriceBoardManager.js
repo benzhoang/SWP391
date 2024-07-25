@@ -190,7 +190,7 @@ export default class PriceBoardManager extends Component {
                             <th colSpan={5}>
                                 <div className="">
                                     <div className="d-flex align-items-center justify-content-between">
-                                        <div>Bảng giá số {price.priceListId}</div>
+                                        <div className="">Bảng giá số {price.priceListId}</div>
                                         <div>
                                             <button
                                                 type="button"

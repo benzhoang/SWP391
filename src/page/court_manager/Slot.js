@@ -73,7 +73,7 @@ export default class Slot extends Component {
             .catch((error) => {
                 if (error.response && error.response.status === 401) {
                     if (error.response.data.message === "Slot với tên này đã có trong danh sách.") {
-showAlert("error", "Lỗi!", "Slot với tên này đã có trong danh sách.", "top-end");
+                        showAlert("error", "Lỗi!", "Slot với tên này đã có trong danh sách.", "top-end");
                     }
                 }
             });
@@ -129,7 +129,7 @@ showAlert("error", "Lỗi!", "Slot với tên này đã có trong danh sách.", 
             }
         });
     };
-handleInputChange = (event) => {
+    handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState((prevState) => ({
             slot: {
@@ -207,7 +207,7 @@ handleInputChange = (event) => {
                                 </tr>
                             ) : (
                                 currentSlots.map((slot, index) => (
-<tr className="" key={slot.slotId}>
+                                    <tr className="" key={slot.slotId}>
                                         <td className="text-center">{indexOfFirstSlot + index + 1}</td>
                                         <td className="text-center">{slot.slotId}</td>
                                         <td className="text-center">{slot.slotName}</td>
@@ -256,7 +256,7 @@ handleInputChange = (event) => {
                             <div className="modal-body">
                                 <form>
                                     <div className="form-group">
-<label>Tên slot</label>
+                                        <label>Tên slot</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -306,7 +306,7 @@ handleInputChange = (event) => {
                                     Đóng
                                 </button>
                                 <button type="button" className="btn btn-primary" onClick={this.handleAddSlot}>
-Lưu lại
+                                    Lưu lại
                                 </button>
                             </div>
                         </div>

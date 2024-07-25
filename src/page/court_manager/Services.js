@@ -183,7 +183,7 @@ export default class Services extends Component {
     render() {
         return (
             <div className="services-for-court">
-                <h4>Quản lý danh sách dịch vụ trong các cơ sở</h4>
+                <h3 className="text-center">Quản lý danh sách dịch vụ trong các cơ sở</h3>
                 <div className="form-group">
                     <select id="courtSelect" className="form-control w-50 m-auto" onChange={this.handleCourtChange}>
                         {this.state.courts.map((court) => (

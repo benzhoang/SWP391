@@ -6,11 +6,13 @@ import axiosInstance from "../../../../config/axiosConfig";
 import { alert, showConfirmAlert, showConfirmPayment } from "../../../../utils/alertUtils";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Spinner from "../../../../components/snipper";
 const DetailBooking = () => {
     const [booking, setBooking] = useState(null);
     const [bookingDetailsList, setBookingDetailsList] = useState([]);
     const [paymentUrl, setPaymentUrl] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
     const [user, setUser] = useState({
@@ -36,13 +38,14 @@ const DetailBooking = () => {
                 throw new Error("Missing paymentId or PayerID");
             }
 
+            setLoading(true);
             const response = await axiosInstance.get(`/paypal/success?paymentId=${paymentId}&PayerID=${PayerID}`);
 
             if (response.data && response.data.id) {
                 const paymentId = response.data.id;
 
                 const bookingResponse = await axiosInstance.post(`/booking/success/${paymentId}`, bookingData);
-
+                setLoading(false);
                 if (bookingResponse.data.message === "Đã đặt lịch thành công.") {
                     showConfirmPayment(
                         "Thông báo",
@@ -111,7 +114,7 @@ const DetailBooking = () => {
         const API_KEY = "a2ebea95ae9c3ce5ae387b15";
         const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
 
-        try {
+        try {      
             const response = await axios.get(BASE_URL);
             if (response.status === 200) {
                 const exchangeRates = response.data.conversion_rates;
@@ -131,6 +134,7 @@ const DetailBooking = () => {
     const initiatePayment = async () => {
         try {
             // Lấy tỷ giá từ VND sang USD
+            setLoading(true);
             const exchangeRate = await getExchangeRate();
             if (!exchangeRate) {
                 throw new Error("Failed to get exchange rate");
@@ -146,7 +150,8 @@ const DetailBooking = () => {
                 successUrl: "https://forbad.online/detailBooking",
             });
 
-            if (response.status === 200) {
+            setLoading(false);
+            if (response.status === 200 && response.data.length > 0) {
                 setPaymentUrl(response.data);
                 window.location.href = response.data;
             } else {
@@ -178,8 +183,8 @@ const DetailBooking = () => {
     const currentItems =
         booking.bookingType !== "Lịch linh hoạt"
             ? bookingDetailsList
-                  .sort((a, b) => a.yardSchedule.slot.slotName.localeCompare(b.yardSchedule.slot.slotName))
-                  .slice(indexOfFirstItem, indexOfLastItem)
+                .sort((a, b) => a.yardSchedule.slot.slotName.localeCompare(b.yardSchedule.slot.slotName))
+                .slice(indexOfFirstItem, indexOfLastItem)
             : [];
 
     const handleClick = (pageNumber) => {
@@ -190,6 +195,7 @@ const DetailBooking = () => {
         <div className="orderDetailPage">
             <Header isLoggedIn={isLoggedIn} user={user} handleLogout={handleLogout} />
             <div className="fromOrder container">
+                {loading && <Spinner />}
                 <div className="detailOrder row">
                     <div className="col-md-7 col-sm-12 info-order ">
                         <h4>Chi tiết đơn hàng</h4>
@@ -271,10 +277,10 @@ const DetailBooking = () => {
                                                         to="#"
                                                         className="page-link"
                                                         onClick={() => handleClick(index + 1)}
-                                                        // style={{
-                                                        //     color: "white",
-                                                        //     backgroundColor: currentPage === index + 1 ? "aquamarine" : "#002e86",
-                                                        // }}
+                                                    // style={{
+                                                    //     color: "white",
+                                                    //     backgroundColor: currentPage === index + 1 ? "aquamarine" : "#002e86",
+                                                    // }}
                                                     >
                                                         {index + 1}
                                                     </Link>
@@ -334,6 +340,7 @@ const DetailBooking = () => {
                                 </label>
                             </div>
                             <button
+                                type="button"
                                 className="btn btn-primary m-0 p-2"
                                 style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
                                 onClick={initiatePayment}

@@ -21,6 +21,20 @@ export default class selectedCourt extends Component {
             });
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.court !== this.props.court) {
+            const { court } = this.props;
+            axiosInstance
+            .get(`court/facilities-of-court/${court.courtId}`)
+            .then((response) => {
+                this.setState({ facilities: response.data });
+            })
+            .catch((error) => {
+                console.error("There was an error fetching the facilities!", error);
+            });
+        }
+    }
+
     render() {
         const { court } = this.props;
         const { facilities } = this.state;

@@ -54,6 +54,160 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.booking-modal-content {
+    padding: 20px;
+}
+
+.booking-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.booking-table th,
+.booking-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.booking-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.booking-table tbody tr {
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.total-amount h5 {
+    color: green;
+    font-weight: bold;
+}
+
+.remaining-amount h5 {
+    color: red;
+    font-weight: bold;
+}
+
+.cash-input {
+    width: 100%;
+    max-width: 100px; /* Adjust this width as needed */
+    padding: 8px 0px 8px 0px;
+    /* border: 1px solid #ced4da; */
+    border-radius: 4px;
+    font-size: 16px;
+    color: rgb(45, 196, 45);
+    font-weight: bold;
+    text-align: left; /* Ensures text aligns to the right */
+    /* text-align: center; Center aligns the placeholder text */
+}
+
+.cash-input::placeholder {
+    color: #999; /* Adjust the placeholder text color if needed */
+    text-align: center; /* Center aligns the placeholder text */
+    font-size: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.staff-page-book-now {
+    max-width: 50px;
+    height: 108px;
+    border-radius: 10px;
+    padding: 15px;
+    margin-right: 15px; /* Space between slots */
+    align-items: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 150px; /* Set a minimum width for each slot */
+    flex-shrink: 0; /* Prevent slots from shrinking */
+}
+
+.staff-page-book-now {
+    margin: 0 15px 0 0 !important;
+}
+
+.staff-page-selected-slots {
+    position: fixed; /* Make the container fixed on the screen */
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000; /* Ensure it appears on top of other elements */
+    overflow-x: auto; /* Allow horizontal scrolling if content overflows */
+    max-height: 80vh; /* Prevent it from taking up too much vertical space */
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.staff-page-selected-slot {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    margin-right: 15px; /* Space between slots */
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 200px; /* Set a minimum width for each slot */
+    flex-shrink: 0; /* Prevent slots from shrinking */
+}
+
+.staff-page-selected-slot:hover {
+    background: #e8f4fd;
+    transform: scale(1.02);
+}
+
+.staff-page-slot-icon {
+    margin-right: 15px;
+    font-size: 30px;
+    color: #007bff;
+    animation: bounce 1s infinite;
+}
+
+.staff-page-price-icon {
+    margin-right: 15px;
+    font-size: 30px;
+    color: green;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.staff-page-slot-info {
+    flex-grow: 1;
+}
+
+.staff-page-slot-info strong {
+    font-weight: bold;
+}
+
+.staff-page-slot-info span {
+    color: #555;
+}
+
 @media (max-width: 817px) {
     .staffPageManager .btn {
         font-size: 11px;

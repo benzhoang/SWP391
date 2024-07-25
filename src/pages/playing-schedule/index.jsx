@@ -4,12 +4,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addDays, format, eachDayOfInterval, parse, differenceInHours } from "date-fns";
 import { sl, vi } from "date-fns/locale";
 import axiosInstance from "../../config/axiosConfig";
-import { showAlert, showConfirmPayment } from "../../utils/alertUtils";
+import { alert, showAlert, showConfirmPayment } from "../../utils/alertUtils";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import "../playing-schedule/index.css";
 import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
+import Spinner from "../../components/snipper";
 
 // Register the Vietnamese locale with react-datepicker
 registerLocale("vi", vi);
@@ -151,7 +152,8 @@ export default class PlayingSchedule extends Component {
             },
             rating: 5,
             comment: "Good",
-            isRated: false
+            isRated: false,
+            loading: false
         };
     }
 
@@ -182,19 +184,21 @@ export default class PlayingSchedule extends Component {
             this.fetchStatusSlots('COMPLETED', 'completedSlots');
             this.fetchStatusSlots('CANCELLED', 'cancelledSlots');
         }
+
+        if (prevState.waitingCheckInSlots !== this.state.waitingCheckInSlots) {
+            this.checkAndAutoCancelCheckIn();
+        }
     }
 
     fetchStatusSlots = (status, list) => {
-
+        this.setState({ loading: true });
         const formattedDates = this.state.daysOfWeek.map((day) => day.split(" ")[0]);
 
         axiosInstance
             .post(`/booking/${status}/slots`, formattedDates)
             .then((response) => {
+                this.setState({ loading: false });
                 this.setState({ [list]: response.data });
-                if (this.state.waitingCheckInSlots) {
-                    this.checkAndAutoCancelCheckIn();
-                }
             })
             .catch((error) => {
                 console.error("There was an error fetching the slots!", error);
@@ -396,7 +400,7 @@ export default class PlayingSchedule extends Component {
         }
     };
 
-    handleCancelCheckIn = async (bookingDetails, payment) => {
+    handleCancelCheckIn = async (bookingDetails, payment, court) => {
         try {
             const bookingDateTime = this.convertStringDateTimeToDateTime(bookingDetails.date, bookingDetails.yardSchedule.slot.startTime);
             const currentDateTime = new Date();
@@ -419,41 +423,96 @@ export default class PlayingSchedule extends Component {
                     const saleId = payment.saleId;
                     const refundAmount = bookingDetails.price / exchangeRate;
 
-                    const result = await showConfirmPayment("Thông báo", "Bạn có chắc muốn hủy đơn này ?", "warning", "Chắc chắn", "Trở lại", "center");
+                    const result = await showConfirmPayment("Thông báo", "Bạn có chắc muốn hủy giờ chơi này ?", "warning", "Chắc chắn", "Trở lại", "center");
                     if (result.isConfirmed) {
+                        this.setState({ loading: true });
                         const refundResponse = await axiosInstance.post(`/paypal/refund/${saleId}/${refundAmount}`);
+
                         if (refundResponse.data.message === "Refund successful") {
                             console.log("Refund successful.");
-                            confirmResponse = await axiosInstance.post(`/booking-details/${bookingDetails.detailId}/cancel`);
+                            confirmResponse = await axiosInstance.post(`/booking-details/${bookingDetails.detailId}/cancel?refund=true`);
+                            this.setState({ loading: false });
+                            if (confirmResponse && confirmResponse.data.message === 'Hủy đơn thành công') {
+                                alert(
+                                    "success",
+                                    "Thông báo",
+                                    "Hủy giờ chơi thành công ! Số tiền của giờ chơi đã được hoàn trả vào tài khoản Paypal của bạn.",
+                                    "center"
+                                );
+
+                                this.handleCloseModal();
+                                this.fetchStatusSlots('WAITING_FOR_CHECK_IN', 'waitingCheckInSlots');
+                                this.fetchStatusSlots('COMPLETED', 'completedSlots');
+                                this.fetchStatusSlots('CANCELLED', 'cancelledSlots');
+                            } else if (!confirmResponse) {
+                                showAlert('error', 'Thông báo', 'Hủy giờ chơi không thành công !', 'top-end');
+                            }
                         } else {
                             throw new Error("Refund failed");
                         }
+                    } else if (result.dismiss) {
+                        return;
                     }
                 } else {
-                    const result = await showConfirmPayment("Thông báo", "Bạn có chắc muốn hủy đơn này ?", "warning", "Chắc chắn", "Trở lại", "center");
+                    const result = await showConfirmPayment("Thông báo", "Bạn có chắc muốn hủy giờ chơi này ?", "warning", "Chắc chắn", "Trở lại", "center");
+
                     if (result.isConfirmed) {
-                        confirmResponse = await axiosInstance.post(`/booking-details/${bookingDetails.detailId}/cancel`);
+                        this.setState({ loading: true });
+                        const refundResponse = await axiosInstance.post(`/booking-details/${bookingDetails.detailId}/refund-hours`);
+
+                        if (refundResponse.data.message === "Refund flexible hours successful") {
+                            confirmResponse = await axiosInstance.post(`/booking-details/${bookingDetails.detailId}/cancel?refund=true`);
+                            this.setState({ loading: false });
+                            if (confirmResponse && confirmResponse.data.message === 'Hủy đơn thành công') {
+                                alert(
+                                    "success",
+                                    "Thông báo",
+                                    `Hủy giờ chơi thành công ! Số giờ linh hoạt đã được hoàn vào lịch linh hoạt của bạn ở cơ sở ${court?.courtName}.`,
+                                    "center"
+                                );
+
+                                this.handleCloseModal();
+                                this.fetchStatusSlots('WAITING_FOR_CHECK_IN', 'waitingCheckInSlots');
+                                this.fetchStatusSlots('COMPLETED', 'completedSlots');
+                                this.fetchStatusSlots('CANCELLED', 'cancelledSlots');
+                            } else if (!confirmResponse) {
+                                showAlert('error', 'Thông báo', 'Hủy giờ chơi không thành công !', 'top-end');
+                            }
+                        } else {
+                            throw new Error("Refund failed");
+                        }
+                    } else if (result.dismiss) {
+                        return;
                     }
                 }
             } else {
-                const result = await showConfirmPayment("Lưu ý", `Bạn chỉ cách thời gian check in ${hoursDifference} tiếng (nhỏ hơn 24 tiếng)! Bạn sẽ không được hoàn lại tiền nếu hủy đơn này.`, "warning", "Đồng ý", "Trở lại", "center");
+                const result = await showConfirmPayment("Lưu ý", `Bạn chỉ cách thời gian check in ${hoursDifference} tiếng (nhỏ hơn 24 tiếng)! Bạn sẽ không được hoàn lại tiền (hoặc giờ linh hoạt) nếu hủy giờ chơi này.`, "warning", "Đồng ý", "Trở lại", "center");
                 if (result.isConfirmed) {
-                    confirmResponse = await axiosInstance.post(`/booking-details/${bookingDetails.detailId}/cancel`);
-                }
-            }
+                    this.setState({ loading: true });
+                    confirmResponse = await axiosInstance.post(`/booking-details/${bookingDetails.detailId}/cancel?refund=false`);
+                    this.setState({ loading: false });
+                    if (confirmResponse && confirmResponse.data.message === 'Hủy đơn thành công') {
+                        alert(
+                            "success",
+                            "Thông báo",
+                            "Hủy giờ chơi thành công !",
+                            "center"
+                        );
 
-            if (confirmResponse && confirmResponse.data.message === 'Hủy đơn thành công') {
-                showAlert('success', 'Thông báo', 'Đã hủy đơn thành công !', 'top-end');
-                this.handleCloseModal();
-                this.fetchStatusSlots('WAITING_FOR_CHECK_IN', 'waitingCheckInSlots');
-                this.fetchStatusSlots('COMPLETED', 'completedSlots');
-                this.fetchStatusSlots('CANCELLED', 'cancelledSlots');
-            } else if (!confirmResponse) {
-                showAlert('error', 'Thông báo', 'Hủy đơn không thành công !', 'top-end');
+                        this.handleCloseModal();
+                        this.fetchStatusSlots('WAITING_FOR_CHECK_IN', 'waitingCheckInSlots');
+                        this.fetchStatusSlots('COMPLETED', 'completedSlots');
+                        this.fetchStatusSlots('CANCELLED', 'cancelledSlots');
+                    } else if (!confirmResponse) {
+                        showAlert('error', 'Thông báo', 'Hủy giờ chơi không thành công !', 'top-end');
+                    }
+                } else if (result.dismiss) {
+                    return;
+                }
             }
         } catch (error) {
             console.error('Failed to cancel', error);
-            showAlert('error', 'Thông báo', 'Đã xảy ra lỗi trong quá trình hủy đơn!', 'top-end');
+            showAlert('error', 'Thông báo', 'Đã xảy ra lỗi trong quá trình hủy giờ chơi!', 'top-end');
         }
     }
 
@@ -468,15 +527,15 @@ export default class PlayingSchedule extends Component {
 
         waitingCheckInSlotsForToday.forEach(checkInDto => {
 
-            const slotStartTime = checkInDto?.bookingDetails?.yardSchedule?.slot?.startTime;
+            const slotEndTime = checkInDto?.bookingDetails?.yardSchedule?.slot?.endTime;
 
-            if (slotStartTime) {
-                const [slotHour, slotMinute] = slotStartTime.split(':').map(Number);
-                const slotStartDateTime = new Date(currentDate);
-                slotStartDateTime.setHours(slotHour, slotMinute, 0, 0); // Cập nhật giờ và phút cho đối tượng Date
+            if (slotEndTime) {
+                const [slotHour, slotMinute] = slotEndTime.split(':').map(Number);
+                const slotEndDateTime = new Date(currentDate);
+                slotEndDateTime.setHours(slotHour, slotMinute, 0, 0); // Cập nhật giờ và phút cho đối tượng Date
 
                 // So sánh thời gian slot với giờ hiện tại
-                if (slotStartDateTime < currentDate) {
+                if (slotEndDateTime < currentDate) {
                     this.autoCancelCheckIn(checkInDto?.bookingDetails?.detailId); // Gọi hàm tự động hủy check-in
                 }
             }
@@ -485,7 +544,7 @@ export default class PlayingSchedule extends Component {
 
     autoCancelCheckIn = async (detailId) => {
         try {
-            const confirmResponse = await axiosInstance.post(`/booking-details/${detailId}/cancel`);
+            const confirmResponse = await axiosInstance.post(`/booking-details/${detailId}/cancel?refund=false`);
             if (confirmResponse.data.message === "Hủy đơn thành công") {
                 this.fetchStatusSlots("WAITING_FOR_CHECK_IN", "waitingCheckInSlots");
                 this.fetchStatusSlots("COMPLETED", "completedSlots");
@@ -527,7 +586,7 @@ export default class PlayingSchedule extends Component {
 
 
     render() {
-        const { daysOfWeek, isLoggedIn, user } = this.state;
+        const { daysOfWeek, isLoggedIn, user, loading } = this.state;
 
         return (
             <div className="playing-schedule-page">
@@ -536,6 +595,7 @@ export default class PlayingSchedule extends Component {
                     <div className="booking row">
                         <div className="col-lg-12">
                             <div className="">
+
                                 <div className="week-navigation">
                                     {/* Nút để lùi về tuần trước */}
                                     <button className="navigation-button" onClick={this.handlePreviousWeek}>Tuần trước</button>
@@ -600,6 +660,7 @@ export default class PlayingSchedule extends Component {
                                         </div>
                                     </div>
                                 </form>
+
                                 <Modal
                                     show={this.state.showModal}
                                     onHide={() => this.setState({ showModal: false })}
@@ -610,9 +671,8 @@ export default class PlayingSchedule extends Component {
                                         <Modal.Title>Thông tin chi tiết</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
+                                        {loading && <Spinner />}
                                         <div className="modal-body-ticket">
-
-
                                             <div className="checkin-info">
                                                 <h4>{this.state.selectedCourtInfo?.courtName}</h4>
                                                 <b>Ngày check-in: </b> {this.state.bookingDetails?.date} <br />
@@ -628,7 +688,7 @@ export default class PlayingSchedule extends Component {
                                     </Modal.Body>
                                     <Modal.Footer>
                                         {this.state.bookingDetails?.status === 'Đang chờ check-in' && (
-                                            <Button variant="danger" style={{ padding: '10px' }} onClick={() => this.handleCancelCheckIn(this.state.bookingDetails, this.state.selectedPaymentInfo)}>
+                                            <Button variant="danger" style={{ padding: '10px' }} onClick={() => this.handleCancelCheckIn(this.state.bookingDetails, this.state.selectedPaymentInfo, this.state.selectedCourtInfo)}>
                                                 Hủy đơn
                                             </Button>
                                         )}
